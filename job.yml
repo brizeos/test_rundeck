@@ -9,47 +9,30 @@
   options:
     - name: env
       title: "Environnement"
-      description: "Choisir la cible"
       required: true
       enforced: true
       value: "int"
-      values:
-        - dev
-        - int
-        - preprod
-        - prod
+      values: [dev, int, preprod, prod]
 
     - name: version
       title: "Version / Tag"
-      description: "Ex: v1.2.3 ou 2026.01.13"
       required: true
 
     - name: dry_run
       title: "Dry-run"
-      description: "Ne pas exécuter réellement"
       required: true
       enforced: true
       value: "false"
-      values:
-        - "true"
-        - "false"
+      values: ["true","false"]
 
     - name: modules
       title: "Modules"
-      description: "Sélection multiple"
-      required: false
       enforced: true
       multivalued: true
       delimiter: ","
-      values:
-        - api
-        - batch
-        - ui
-        - worker
+      values: [api, batch, ui, worker]
 
   sequence:
-    keepgoing: false
-    strategy: node-first
     commands:
       - exec: |
           echo "ENV=${option.env}"
