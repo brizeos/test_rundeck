@@ -1,0 +1,59 @@
+- name: "DNAT - Formulaire (demo)"
+  description: "Démo : formulaire Rundeck via Job Options"
+  group: "DNAT/Demo"
+  loglevel: INFO
+  executionEnabled: true
+  scheduleEnabled: false
+  nodeFilterEditable: false
+
+  options:
+    - name: env
+      title: "Environnement"
+      description: "Choisir la cible"
+      required: true
+      enforced: true
+      value: "int"
+      values:
+        - dev
+        - int
+        - preprod
+        - prod
+
+    - name: version
+      title: "Version / Tag"
+      description: "Ex: v1.2.3 ou 2026.01.13"
+      required: true
+
+    - name: dry_run
+      title: "Dry-run"
+      description: "Ne pas exécuter réellement"
+      required: true
+      enforced: true
+      value: "false"
+      values:
+        - "true"
+        - "false"
+
+    - name: modules
+      title: "Modules"
+      description: "Sélection multiple"
+      required: false
+      enforced: true
+      multivalued: true
+      delimiter: ","
+      values:
+        - api
+        - batch
+        - ui
+        - worker
+
+  sequence:
+    keepgoing: false
+    strategy: node-first
+    commands:
+      - exec: |
+          echo "ENV=${option.env}"
+          echo "VERSION=${option.version}"
+          echo "DRY_RUN=${option.dry_run}"
+          echo "MODULES=${option.modules}"
+          echo "✅ Formulaire OK : valeurs reçues."
