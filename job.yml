@@ -31,6 +31,12 @@
       multivalued: true
       delimiter: ","
       values: [api, batch, ui, worker]
+    - name: modules2
+      title: "Modules"
+      enforced: true
+      multivalued: true
+      delimiter: ","
+      values: [api, batch, ui, worker]
 
   sequence:
     commands:
@@ -40,3 +46,4 @@
           echo "DRY_RUN=${option.dry_run}"
           echo "MODULES=${option.modules}"
           echo "✅ Formulaire OK : valeurs reçues."
+
